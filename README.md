@@ -70,6 +70,6 @@ When missings are present, the percentage computation is done wrt these numbers:
 
 # Related things:
 
-* *astropy*: A python package providing another implementation of 2D convolution, **I think** it interpolates the missings before convoling.
+* *astropy*: A python package providing another implementation of 2D convolution, **I think** it interpolates the missings before convolving.
 * https://github.com/Xunius/Random-Fortran-scripts: some other random Fortran codes I made.
 
