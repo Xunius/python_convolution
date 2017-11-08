@@ -6,7 +6,7 @@ A Python module providing alternative 1D and 2D convolution and moving average f
 The way that *numpy* and *scipy* 's convolution functions treat missing values:
 
 * when missing is masked (data is `numpy.ma.core.MaskedArray`): I think the mask is just ignored.
-* when missing is represented as `numpy.nan`: any overlaping between the kernel and any NaN will create an Nan in the result. So if the data is 101x101 by shape, and there is an NaN at the center (`data[50,50]`), the kernel is 5x5 by shape, then the result will have a hole of NaNs at the center, with a size of 5x5.
+* when missing is represented as `numpy.nan`: any overlaping between an NaN with the kernel (even if it overlaps with a 0 in the kernel ) will create an NaN in the result. So if the data is 101x101 by shape, and there is an NaN at the center (`data[50,50]`), the kernel is 5x5 by shape, then the result will have a hole of NaNs at the center, with a size of 5x5.
 
 A relevant question on SO: https://stackoverflow.com/q/38318362/2005415
 
@@ -52,7 +52,9 @@ import conv1d
 print conv1d.conv1d.__doc__
 ```
 
-# Further notes on the treatment of edges
+# Some further notes
+
+##  Treatment of the edges
 
 No padding, mirroring or reflecting is done at the edges. The kernel takes only data within range, and at the same time the counting of valid number of data points within kernel takes only data in range.
 
@@ -67,6 +69,25 @@ When missings are present, the percentage computation is done wrt these numbers:
 * x/25 at center,
 * x/9 at corner,
 * x/15 at edge.
+
+## Treatment of 0s in the kernel
+
+0s in the kernel are not taken into account in the convolution. This is useful for kernels of irregular shapes, e.g. 2d multivariate Gaussian kernel with an ellipse shape where kernel drops to 0 around the peripheral of the kernel array (which is a rectangular matrix). Valid data points at 0s in the kernel are not counted.
+
+E.g. in a 3x3 diamond kernel:
+
+```
+ -----------
+| 0 | 1 | 0 |
+ -----------
+| 1 | 1 | 1 |
+ -----------
+| 0 | 1 | 0 |
+ -----------
+```
+ 
+Missing percentages are calculated as: x/5
+
 
 # Related things:
 
