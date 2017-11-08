@@ -26,8 +26,7 @@ A Python module providing functions:
   3. `runMean1D()`: 1D running mean on n-d array.
   4. `runMean2D()`: 2D running mean on 2-d array.
   
-The 1D convolution functions call the Fortran module `conv1d` for the core computations.
-The 2D convolution functions call the Fortran module `conv2d` for the core computations.
+The 1D convolution functions call the Fortran module `conv1d` for the core computations, and the 2D functions the `conv2d` module.
 
 ## `conv1d.f90`, `conv2d.f90`
 
