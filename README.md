@@ -19,7 +19,7 @@ But in other cases, you probably don't want to lose so much information just bec
 
 ## `convolve.py`
 
-A Python module consisting functions:
+A Python module providing functions:
 
   1. `convolve1D()`: 1D convolution on n-d array.
   2. `convolve2D()`: 2D convolution on 2-d array.
