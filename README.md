@@ -17,7 +17,7 @@ But in other cases, you probably don't want to lose so much information just bec
 
 # What's in this
 
-1. `convolve.py`
+## `convolve.py`
 
 A Python module consisting functions:
 
@@ -29,18 +29,16 @@ A Python module consisting functions:
 The 1D convolution functions call the Fortran module `conv1d` for the core computations.
 The 2D convolution functions call the Fortran module `conv2d` for the core computations.
 
-2. `conv1d.f90`, `conv2d.f90`
+## `conv1d.f90`, `conv2d.f90`
 
 Fortran 90 codes for the core computation of convolution and running mean.
 
-3. `conv1d.pyf`, `conv2d.pyf`
+## `conv1d.pyf`, `conv2d.pyf`
 
 Signature files used to compile Fortran `.90` codes to Python modules.
 
 
 # Usage
-
-1. Compile Fortran code
 
 To compile `conv1d.f90` and `conv2d.f90` using *f2py*:
 
