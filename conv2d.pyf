@@ -1,0 +1,35 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module conv2d ! in 
+    interface  ! in :conv2d
+        module conv2d ! in :conv2d:conv2d.f90
+            integer, private,parameter,optional :: ikind=selected_real_kind(p=15,r=10)
+            subroutine convolve2d(slab,slabmask,kernel,kernelflag,max_missing,resslab,resmask,hs,ws) ! in :conv2d:conv2d.f90:conv2d
+                real(kind=8) dimension(hs,ws),intent(in) :: slab
+                integer dimension(hs,ws),intent(in),depend(hs,ws) :: slabmask
+                real(kind=8) dimension(:,:),intent(in) :: kernel
+                integer dimension(:,:),intent(in) :: kernelflag
+                real intent(in) :: max_missing
+                real(kind=8) dimension(hs,ws),intent(out),depend(hs,ws) :: resslab
+                integer dimension(hs,ws),intent(out),depend(hs,ws) :: resmask
+                integer, optional,check(shape(slab,0)==hs),depend(slab) :: hs=shape(slab,0)
+                integer, optional,check(shape(slab,1)==ws),depend(slab) :: ws=shape(slab,1)
+            end subroutine convolve2d
+            subroutine runmean2d(slab,slabmask,kernel,kernelflag,max_missing,resslab,resmask,hs,ws) ! in :conv2d:conv2d.f90:conv2d
+                real(kind=8) dimension(hs,ws),intent(in) :: slab
+                integer dimension(hs,ws),intent(in),depend(hs,ws) :: slabmask
+                real(kind=8) dimension(:,:),intent(in) :: kernel
+                integer dimension(:,:),intent(in) :: kernelflag
+                real intent(in) :: max_missing
+                real(kind=8) dimension(hs,ws),intent(out),depend(hs,ws) :: resslab
+                integer dimension(hs,ws),intent(out),depend(hs,ws) :: resmask
+                integer, optional,check(shape(slab,0)==hs),depend(slab) :: hs=shape(slab,0)
+                integer, optional,check(shape(slab,1)==ws),depend(slab) :: ws=shape(slab,1)
+            end subroutine runmean2d
+        end module conv2d
+    end interface 
+end python module conv2d
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
